@@ -1,0 +1,116 @@
+{% include 'footer2.html' %}
+<style>
+    .product-container {
+        max-width: 600px;
+        padding: 40px;
+        background: linear-gradient(135deg, #3b3f47, #232323);
+        border-radius: 15px;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        overflow: hidden;
+        margin-top: 100px;
+    }
+
+    .product-container:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+        width: 350px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        object-fit: cover;
+    }
+
+    .product-title {
+        font-size: 1.9rem;
+        font-weight: bold;
+        color: #f1f1f1;
+        margin-top: 10px;
+    }
+
+    .product-description {
+        font-size: 1rem;
+        color: #d1d1d1;
+        margin-top: 15px;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4caf50;
+        margin-top: 10px;
+    }
+
+    .quantity-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .quantity-label {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        color: #ccc;
+    }
+
+    .quantity-input {
+        width: 80px;
+        padding: 5px;
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: #333;
+        border: 1px solid #555;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    .btn-rounded {
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 25px;
+        color: #fff;
+        background-color: #4caf50;
+        border: none;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .btn-rounded:disabled {
+        background-color: #b3b3b3;
+        cursor: not-allowed;
+    }
+
+    .btn-rounded:hover:not(:disabled) {
+        background-color: #43a047;
+    }
+</style>
+
+<div class="product-container container" style="margin-bottom: 120px;">
+    <img src="data:{{ product.image_mimetype }};base64,{{ b64encode(product.image).decode('utf-8') }}" alt="Product Image" class="product-image">
+    <h1 class="product-title">{{product.name}}</h1>
+    <p class="product-description">{{product.description|safe}}</p>
+    <p class="product-price">PLN {{product.price}}</p>
+    <form method="POST" novalidate>
+      <div class="quantity-container">
+        <label class="quantity-label">Ilość:</label>
+        <input type="number" name="amount" class="quantity-input" value="1" min="0" max="{{ product.amount }}">
+        {% if product.amount >= 1 and is_product != 1 %}
+        <button class="btn-rounded" type="submit" data-mdb-ripple-init>Dodaj do koszyka</button>
+        {% else %}
+          <button class="btn-rounded" type="submit" data-mdb-ripple-init disabled>Produkt niedostępny</button>
+        {% endif %}
+      </div>
+    </form>
+</div>
+
+{% include 'footer.html' %}

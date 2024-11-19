@@ -1,0 +1,20 @@
+<style>
+    .form-label {
+        color: white !important;
+        margin-top: auto;
+    }
+    .btn-primary {
+        margin-top: 15px;
+    }
+</style>
+
+{% from 'bootstrap5/form.html' import render_form %}
+{% include "footer2.html" %}
+<div class="container text-white col-lg-3 text-white" style="margin-top: 120px; margin-bottom: 30px;">
+    {{ ckeditor.load() }} {{ ckeditor.config(name="body") }}
+    {{ render_form(form, novalidate=True) }}
+    {% for alert in alerts %}
+    <h6 class="text-danger mt-2">{{ alert }}</h6>
+    {% endfor %}
+</div>
+{% include "footer.html" %}
