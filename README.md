@@ -70,6 +70,37 @@ By following these steps, you will be ready to work on your application in a wel
 ---
 
 
+## 4. **Stripe Webhook - Local Configuration**
+
+To run the Stripe Webhook locally, follow these steps:
+
+1. **Install Stripe CLI**  
+   Stripe CLI is a tool for testing and managing Stripe Webhooks. To install Stripe CLI on Linux Ubuntu, use the following command:  
+   ```bash
+   curl -fsSL https://stripe.com/install.sh | bash
+   ```
+
+2. **Log in to Stripe CLI**
+   After installation, log in to your Stripe account using: 
+   ```bash
+   stripe login
+   ```
+   
+3. **Run the Stripe Webhook locally**
+   To forward Stripe Webhook notifications to your local server, use the command:  
+   ```bash
+   stripe listen --events checkout.session.completed \
+   --forward-to localhost:4242/webhook
+   ```
+
+4. **Configure the Webhook Secret Key in the Application**
+   Stripe generates a Webhook secret key when running Stripe CLI. Save this key and add it to the environment variables in your application, e.g., in the .env file: 
+   ```bash
+   STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx
+   ```
+
+
+
 
 
 
@@ -172,7 +203,7 @@ Aby uruchomić Stripe Webhook lokalnie, wykonaj poniższe kroki:
    --forward-to localhost:4242/webhook
    ```
 
-3. **Skonfiguruj klucz Webhook w aplikacji:**
+4. **Skonfiguruj klucz Webhook w aplikacji:**
    Stripe generuje klucz Webhook podczas uruchamiania Stripe CLI. Zapisz ten klucz i dodaj go do zmiennych środowiskowych w aplikacji, np. w pliku .env:  
    ```bash
    STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxx
