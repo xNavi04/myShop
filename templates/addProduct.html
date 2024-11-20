@@ -9,7 +9,7 @@
 </style>
 
 {% from 'bootstrap5/form.html' import render_form %}
-{% include "footer2.html" %}
+{% include "header.html" %}
 <div class="container text-white col-lg-3 text-white" style="margin-top: 120px; margin-bottom: 30px;">
     {{ ckeditor.load() }} {{ ckeditor.config(name="body") }}
     {{ render_form(form, novalidate=True) }}
