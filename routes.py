@@ -60,7 +60,7 @@ def init_routes(app, login_manager, db):
             "b64encode": b64encode,
             "product": product,
             "amount": kwargs["amount"],
-            "is_product": check_if_is_product(product, session, db)
+            "is_product": check_if_is_product(product, session, db, current_user)
             }
         template = "oneProduct.html"
         return render_template(template, **content)
