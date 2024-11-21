@@ -6,7 +6,7 @@ import os
 import stripe
 from flask_login import LoginManager
 
-stripe.api_key = "sk_test_51Q6BRl2N9mbjCqj3FO904WVDvLHxI167gvo593db8Av2FK19yiKNSAYm4JiOzosWhbTngLPFhEpa2M8301UsuPKR00JEXdy5hA"
+stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
 endpoint_secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
 
 def create_app():

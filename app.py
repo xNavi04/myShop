@@ -1,6 +1,5 @@
 from config import create_app
 from routes import init_routes
-#
 
 app, login_manager, db, endpoint_secret = create_app()
 
