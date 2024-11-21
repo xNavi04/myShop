@@ -19,7 +19,7 @@ from activity.deleteProduct import invoke_delete_product
 from activity.success import delete_all_basket_products
 from decorators import get_data, manage_product, see_ware_house
 
-def init_routes(app, login_manager, db):
+def init_routes(app, login_manager, db, endpoint_secret):
     @login_manager.user_loader
     def load_user(user_id):
         return db.get_or_404(User, user_id)
@@ -198,7 +198,6 @@ def init_routes(app, login_manager, db):
             return render_template(template, logged_in=current_user.is_authenticated, alerts=alerts, amount=kwargs["amount"])
     @app.route('/webhook', methods=['POST'])
     def webhook():
-        endpoint_secret = "whsec_98a1720fbee9038c2393b8e5a42b861476f232f6f1eb1a31f1a5b1a100449f3d"
         invoke_webhook(request, stripe, endpoint_secret, db)
         return jsonify(success=True)
     @app.route("/warehouse")
